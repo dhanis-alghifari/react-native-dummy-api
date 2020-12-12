@@ -8,6 +8,10 @@ const CallApiVanilla = () => {
     first_name: '',
     last_name: '',
   });
+  const [dataJob, setDataJob] = useState({
+    name: '',
+    job: '',
+  });
   //   useEffect(() => {
   //     //   Call API Method Get
   //     fetch('https://reqres.in/api/users/2')
@@ -41,6 +45,25 @@ const CallApiVanilla = () => {
       });
   };
 
+  const postData = () => {
+    const dataForApi = {
+      name: 'morpheus',
+      job: 'leader',
+    };
+    fetch('https://reqres.in/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataForApi),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log('post response', json);
+        setDataJob(json);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.textTitle}>Call API Dengan Vanilla JS</Text>
@@ -55,8 +78,10 @@ const CallApiVanilla = () => {
       <Text>{dataUser.email}</Text>
 
       <View style={styles.line} />
-      <Button title="GET DATA" />
-      <Text>Response GET DATA</Text>
+      <Button title="POST DATA" onPress={postData} />
+      <Text>Response POST DATA</Text>
+      <Text>{dataJob.name}</Text>
+      <Text>{dataJob.job}</Text>
     </View>
   );
 };
