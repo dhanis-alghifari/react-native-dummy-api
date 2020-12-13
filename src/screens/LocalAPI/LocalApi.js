@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   Button,
   ScrollView,
   StyleSheet,
@@ -9,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import ItemList from '../../components/ItemList/ItemList';
+
 
 const LocalApi = () => {
   const [name, setName] = useState('');
@@ -66,6 +68,14 @@ const LocalApi = () => {
     setButton('Update');
   };
 
+  const deleteItem = (item) => {
+    console.log(item);
+    Axios.delete(`http://10.0.2.2:3004/users/${item.id}`).then((res) => {
+      console.log('res delete: ', res);
+      getData();
+    });
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -99,6 +109,16 @@ const LocalApi = () => {
               email={user.email}
               position={user.position}
               onPress={() => selectItem(user)}
+              onDelete={() =>
+                Alert.alert(
+                  'Peringatan',
+                  'Anda yakin akan menghapus user ini?',
+                  [
+                    {text: 'Tidak', onPress: () => console.log('button tidak')},
+                    {text: 'Ya', onPress: () => deleteItem(user)},
+                  ],
+                )
+              }
             />
           );
         })}

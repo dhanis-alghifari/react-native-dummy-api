@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-const ItemList = ({name, email, position, onPress}) => {
+const ItemList = ({name, email, position, onPress, onDelete}) => {
   return (
     <View style={styles.itemContainer}>
       <TouchableOpacity onPress={onPress}>
@@ -17,8 +17,9 @@ const ItemList = ({name, email, position, onPress}) => {
         <Text style={styles.descEmail}>{email}</Text>
         <Text style={styles.descPosisi}>{position} </Text>
       </View>
-
-      <Text style={styles.delete}>X</Text>
+      <TouchableOpacity onPress={onDelete}>
+        <Text style={styles.delete}>X</Text>
+      </TouchableOpacity>
     </View>
   );
 };
