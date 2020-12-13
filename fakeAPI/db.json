@@ -2,8 +2,8 @@
   "users": [
     {
       "id": 1,
-      "name": "Dhanis",
-      "email": "dhanisalghifari@gmail.com",
+      "name": "Dhanis AL Ghifari",
+      "email": "dhanisal@gmail.com",
       "position": "Front End Dev"
     },
     {
@@ -17,6 +17,12 @@
       "email": "alghifari@gmail.com",
       "position": "mafia",
       "id": 3
+    },
+    {
+      "name": "cino",
+      "email": "cino@gmail.com",
+      "position": "back end dev",
+      "id": 4
     }
   ]
 }

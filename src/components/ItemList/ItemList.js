@@ -1,19 +1,19 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
-const ItemList = () => {
+const ItemList = ({name, email, position}) => {
   return (
     <View style={styles.itemContainer}>
       <Image
         source={{
-          uri: 'https://ui-avatars.com/api/?background=0D8ABC&color=fff',
+          uri: `https://ui-avatars.com/api/?name=${name}`,
         }}
         style={styles.avatar}
       />
       <View style={styles.desc}>
-        <Text style={styles.descName}>Nama Lengkap : </Text>
-        <Text style={styles.descEmail}>Email : </Text>
-        <Text style={styles.descPosisi}>Posisi : </Text>
+        <Text style={styles.descName}>{name}</Text>
+        <Text style={styles.descEmail}>{email}</Text>
+        <Text style={styles.descPosisi}>{position} </Text>
       </View>
       <Text style={styles.delete}>X</Text>
     </View>

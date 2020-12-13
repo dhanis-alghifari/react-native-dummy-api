@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Button,
   ScrollView,
@@ -14,6 +14,11 @@ const LocalApi = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [position, setPosition] = useState('');
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const submit = () => {
     const data = {
@@ -27,6 +32,14 @@ const LocalApi = () => {
       setName('');
       setEmail('');
       setPosition('');
+      getData();
+    });
+  };
+
+  const getData = () => {
+    Axios.get('http://10.0.2.2:3004/users').then((res) => {
+      console.log('res', res.data);
+      setUsers(res.data);
     });
   };
 
@@ -55,9 +68,16 @@ const LocalApi = () => {
         />
         <Button title="Simpan" onPress={submit} />
         <View style={styles.line} />
-        <ItemList />
-        <ItemList />
-        <ItemList />
+        {users.map((user) => {
+          return (
+            <ItemList
+              key={user.id}
+              name={user.name}
+              email={user.email}
+              position={user.position}
+            />
+          );
+        })}
       </ScrollView>
     </View>
   );
