@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Dhanis",
+      "email": "dhanisalghifari@gmail.com",
+      "position": "Front End Dev"
+    },
+    {
+      "name": "dhanis",
+      "email": "dhanisalghifari@gmail.com",
+      "position": "boss",
+      "id": 2
+    },
+    {
+      "name": "algi",
+      "email": "alghifari@gmail.com",
+      "position": "mafia",
+      "id": 3
+    }
+  ]
+}
