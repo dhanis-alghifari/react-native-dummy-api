@@ -15,6 +15,8 @@ const LocalApi = () => {
   const [email, setEmail] = useState('');
   const [position, setPosition] = useState('');
   const [users, setUsers] = useState([]);
+  const [button, setButton] = useState('Simpan');
+  const [selectedUser, setSelectedUser] = useState({});
 
   useEffect(() => {
     getData();
@@ -26,14 +28,26 @@ const LocalApi = () => {
       email,
       position,
     };
-    console.log('data besofre send', data);
-    Axios.post('http://10.0.2.2:3004/users', data).then((res) => {
-      console.log('res', res);
-      setName('');
-      setEmail('');
-      setPosition('');
-      getData();
-    });
+    if (button === 'Simpan') {
+      Axios.post('http://10.0.2.2:3004/users', data).then((res) => {
+        console.log('res', res);
+        setName('');
+        setEmail('');
+        setPosition('');
+        getData();
+      });
+    } else if (button === 'Update') {
+      Axios.put(`http://10.0.2.2:3004/users/${selectedUser.id}`, data).then(
+        (res) => {
+          console.log('res update', res);
+          setName('');
+          setEmail('');
+          setPosition('');
+          getData();
+          setButton('Simpan');
+        },
+      );
+    }
   };
 
   const getData = () => {
@@ -41,6 +55,15 @@ const LocalApi = () => {
       console.log('res', res.data);
       setUsers(res.data);
     });
+  };
+
+  const selectItem = (item) => {
+    console.log('Selected user', item);
+    setSelectedUser(item);
+    setName(item.name);
+    setEmail(item.email);
+    setPosition(item.position);
+    setButton('Update');
   };
 
   return (
@@ -66,7 +89,7 @@ const LocalApi = () => {
           value={position}
           onChangeText={(value) => setPosition(value)}
         />
-        <Button title="Simpan" onPress={submit} />
+        <Button title={button} onPress={submit} />
         <View style={styles.line} />
         {users.map((user) => {
           return (
@@ -75,6 +98,7 @@ const LocalApi = () => {
               name={user.name}
               email={user.email}
               position={user.position}
+              onPress={() => selectItem(user)}
             />
           );
         })}

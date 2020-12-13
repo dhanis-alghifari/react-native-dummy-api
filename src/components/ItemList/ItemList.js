@@ -1,20 +1,23 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-const ItemList = ({name, email, position}) => {
+const ItemList = ({name, email, position, onPress}) => {
   return (
     <View style={styles.itemContainer}>
-      <Image
-        source={{
-          uri: `https://ui-avatars.com/api/?name=${name}`,
-        }}
-        style={styles.avatar}
-      />
+      <TouchableOpacity onPress={onPress}>
+        <Image
+          source={{
+            uri: `https://ui-avatars.com/api/?name=${name}`,
+          }}
+          style={styles.avatar}
+        />
+      </TouchableOpacity>
       <View style={styles.desc}>
         <Text style={styles.descName}>{name}</Text>
         <Text style={styles.descEmail}>{email}</Text>
         <Text style={styles.descPosisi}>{position} </Text>
       </View>
+
       <Text style={styles.delete}>X</Text>
     </View>
   );
