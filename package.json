@@ -11,6 +11,7 @@
     "emulator-android": "C:/Users/User/AppData/Local/Android/Sdk/emulator/emulator -avd Nexus_5_API_29"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "react": "16.13.1",
     "react-native": "0.63.4"
   },
